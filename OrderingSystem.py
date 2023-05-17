@@ -17,7 +17,7 @@ def calculate_subtotal(order):
         itemPrice = item["price"]
         total+=itemPrice
     total = float(total)
-    return total
+    return round(total,2)
     # raise NotImplementedError()
 
 def calculate_tax(subtotal):
@@ -31,7 +31,9 @@ def summarize_order(order):
     for item in order:
         total+=item['price']
         summary.append(item["name"])
-    return summary,total
+    tax = calculate_tax(total)
+    grandTotal = round(tax + total,2)
+    return summary,grandTotal
     # raise NotImplementedError()
 
 # This function is provided for you, and will print out the items in an order
@@ -66,7 +68,6 @@ def main():
     calculate_subtotal(order)
     subtotal = calculate_subtotal(order)
     print("Subtotal for the order is: " + str(subtotal))
-
     tax = calculate_tax(subtotal)
     print("Tax for the order is: " + str(tax))
     x=summarize_order(order)
